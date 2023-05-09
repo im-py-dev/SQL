@@ -98,11 +98,11 @@ Orders Table:
 
 Customers Table:
 
-| customer_id | first_name | last_name | email                  | phone_number    |
-| ----------- | ---------- | --------- | ---------------------- | ---------------- |
-| 1           | John       | Doe        | johndoe@example.com   | 555-555-1234  |
-| 2           | Jane       | Smith      | janesmith@example.com | 555-555-5678  |
-| 3           | Bob        | Johnson    | bobjohnson@example.com | 555-555-9012  |
+| customer_id | first_name | last_name  | phone_number  |
+| ----------- | ---------- | ---------- | ------------- |
+| 1           | John       | Doe        | 555-555-1234  |
+| 2           | Jane       | Smith      | 555-555-5678  |
+| 3           | Bob        | Johnson    | 555-555-9012  |
 ```
 
 #### We can join these two tables using the "customer_id" column, which is present in both tables:
