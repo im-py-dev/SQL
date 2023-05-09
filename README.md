@@ -171,9 +171,9 @@ They can be created using a SELECT statement and can be used like any other tabl
 __________
 ## Stored Procedures
 
-#### A stored procedure is a named block of code that is stored in a database and can be called multiple times with different input parameters. Stored procedures can be used to encapsulate complex SQL statements, improve performance by reducing network traffic and allowing code to be precompiled, and improve security by allowing controlled access to the database.
+##### A stored procedure is a named block of code that is stored in a database and can be called multiple times with different input parameters. Stored procedures can be used to encapsulate complex SQL statements, improve performance by reducing network traffic and allowing code to be precompiled, and improve security by allowing controlled access to the database.
 
-#### Here's an example of a simple stored procedure in SQL:
+###### Here's an example of a simple stored procedure in SQL:
 
 ```sql
 CREATE PROCEDURE get_customer_orders
@@ -184,30 +184,61 @@ BEGIN
 END
 ```
 
-#### In this example, we're creating a stored procedure called get_customer_orders that takes an input parameter @customer_id and returns all orders for that customer.
+##### In this example, we're creating a stored procedure called get_customer_orders that takes an input parameter @customer_id and returns all orders for that customer.
 
-#### To call this stored procedure, we would use the following syntax:
+###### To call this stored procedure, we would use the following syntax:
 
 ```sql
 EXEC get_customer_orders @customer_id = 1;
 ```
-#### In this example, we're calling the get_customer_orders stored procedure and passing in a value of 1 for the @customer_id parameter.
+##### In this example, we're calling the get_customer_orders stored procedure and passing in a value of 1 for the @customer_id parameter.
 
-#### Here's a real-world scenario where a stored procedure might be useful:
+##### Here's a real-world scenario where a stored procedure might be useful:
 
-#### Let's say you're working on an e-commerce website that sells products to customers around the world. You have a database table called orders that contains information about all orders placed by customers. You need to write a report that shows the total revenue for each country where you have customers.
+##### Let's say you're working on an e-commerce website that sells products to customers around the world. You have a database table called orders that contains information about all orders placed by customers. You need to write a report that shows the total revenue for each country where you have customers.
 
-#### Instead of writing a complex SQL query every time you need to generate this report, you could create a stored procedure that encapsulates the SQL logic and takes a country parameter as input. You could then call this stored procedure multiple times with different country parameters to generate the report for each country.
+##### Instead of writing a complex SQL query every time you need to generate this report, you could create a stored procedure that encapsulates the SQL logic and takes a country parameter as input. You could then call this stored procedure multiple times with different country parameters to generate the report for each country.
 
-#### In summary, stored procedures in SQL are a powerful tool for encapsulating complex SQL logic, improving performance and security, and simplifying common tasks. They can be called multiple times with different input parameters, making them a versatile solution for many database-related challenges.
+###### In summary, stored procedures in SQL are a powerful tool for encapsulating complex SQL logic, improving performance and security, and simplifying common tasks. They can be called multiple times with different input parameters, making them a versatile solution for many database-related challenges.
 __________
 ## Transactions
 
+##### In SQL, a transaction is a set of database operations that are executed as a single unit of work. Transactions ensure that all operations within the transaction are either committed to the database together or rolled back as a single unit, ensuring data consistency and integrity.
+
+###### Here's an example of a simple transaction in SQL:
+
 ```sql
--- Begin a transaction, insert data into the my_table table, and commit the transaction
 BEGIN TRANSACTION;
-INSERT INTO my_table (id, name) VALUES (4, 'Sarah');
+
+UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE account_id = 2;
+
 COMMIT TRANSACTION;
 ```
+##### In this example, we're beginning a transaction, then updating the balance of two bank accounts (subtracting 100 from account 1 and adding 100 to account 2), and finally committing the transaction. If any errors occur during the transaction, the changes made by the updates will be rolled back.
+
+###### Here's a real-world scenario where transactions might be useful:
+
+##### Let's say you're working on an e-commerce website that sells products to customers. You have a database table called orders that contains information about all orders placed by customers, and a table called inventory that contains information about the available stock of each product.
+
+##### When a customer places an order, you need to update the orders table to record the order, and also update the inventory table to reflect the change in stock. However, if the inventory is insufficient to fulfill the order, you want to roll back the entire transaction and not update either table.
+
+##### In this scenario, you could use a transaction to ensure that the updates to both tables are committed together or rolled back together if an error occurs. Here's an example of a transaction that updates both tables:
+
+```sql
+BEGIN TRANSACTION;
+
+INSERT INTO orders (customer_id, product_id, quantity, total_price)
+VALUES (1, 123, 2, 100);
+
+UPDATE inventory SET stock = stock - 2 WHERE product_id = 123;
+
+COMMIT TRANSACTION;
+```
+
+In this example, we're beginning a transaction, inserting a new order into the orders table, updating the inventory table to reflect the change in stock, and finally committing the transaction. If there's not enough stock to fulfill the order, the transaction will be rolled back and no changes will be made to either table.
+
+In summary, transactions in SQL are a powerful tool for ensuring data consistency and integrity, especially in complex scenarios where multiple tables need to be updated together or rolled back together. They help ensure that all operations within the transaction are either committed to the database together or rolled back as a single unit, avoiding errors and maintaining data integrity.
+__________
 
 #### I hope you find these examples helpful. Let me know if you have any questions or need to add more codes.
