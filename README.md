@@ -171,16 +171,35 @@ They can be created using a SELECT statement and can be used like any other tabl
 __________
 ## Stored Procedures
 
+#### A stored procedure is a named block of code that is stored in a database and can be called multiple times with different input parameters. Stored procedures can be used to encapsulate complex SQL statements, improve performance by reducing network traffic and allowing code to be precompiled, and improve security by allowing controlled access to the database.
+
+#### Here's an example of a simple stored procedure in SQL:
+
 ```sql
--- Create a stored procedure called my_proc that inserts data into the my_table table
-CREATE PROCEDURE my_proc
-@id INT,
-@name VARCHAR(50)
+CREATE PROCEDURE get_customer_orders
+    @customer_id INT
 AS
 BEGIN
-INSERT INTO my_table (id, name) VALUES (@id, @name);
-END;
+    SELECT * FROM orders WHERE customer_id = @customer_id;
+END
 ```
+
+#### In this example, we're creating a stored procedure called get_customer_orders that takes an input parameter @customer_id and returns all orders for that customer.
+
+#### To call this stored procedure, we would use the following syntax:
+
+```sql
+EXEC get_customer_orders @customer_id = 1;
+```
+#### In this example, we're calling the get_customer_orders stored procedure and passing in a value of 1 for the @customer_id parameter.
+
+#### Here's a real-world scenario where a stored procedure might be useful:
+
+#### Let's say you're working on an e-commerce website that sells products to customers around the world. You have a database table called orders that contains information about all orders placed by customers. You need to write a report that shows the total revenue for each country where you have customers.
+
+#### Instead of writing a complex SQL query every time you need to generate this report, you could create a stored procedure that encapsulates the SQL logic and takes a country parameter as input. You could then call this stored procedure multiple times with different country parameters to generate the report for each country.
+
+#### In summary, stored procedures in SQL are a powerful tool for encapsulating complex SQL logic, improving performance and security, and simplifying common tasks. They can be called multiple times with different input parameters, making them a versatile solution for many database-related challenges.
 __________
 ## Transactions
 
