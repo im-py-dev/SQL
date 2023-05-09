@@ -51,10 +51,34 @@ SELECT * FROM my_table ORDER BY name DESC;
 ```
 
 ## GROUP BY Clause
+#### We can use the GROUP BY clause to group the orders by customer and calculate the total amount spent by each customer.
+
+```
+| order_id | customer_id | order_date  | total_amount |
+| -------- | ----------- | ----------- | ------------ |
+| 1        | 1           | 2022-01-01  | 100.00       |
+| 2        | 1           | 2022-01-03  | 50.00        |
+| 3        | 2           | 2022-01-05  | 75.00        |
+| 4        | 2           | 2022-01-07  | 200.00       |
+| 5        | 3           | 2022-01-10  | 150.00       |
+```
 
 ```group_by.sql
--- Select the count of names from the my_table table grouped by name
-SELECT name, COUNT(name) as name_count FROM my_table GROUP BY name;
+-- In this query, we are grouping the orders by customer_id, and then using the aggregate function SUM to calculate the total amount spent by each customer.
+
+SELECT customer_id, SUM(total_amount) as total_spent
+FROM orders
+GROUP BY customer_id;
+```
+
+#### The resulting table would look like this:
+
+```
+| customer_id | total_spent |
+| ----------- | ----------- |
+| 1           | 150.00      |
+| 2           | 275.00      |
+| 3           | 150.00      |
 ```
 
 ## JOIN Tables
