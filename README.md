@@ -137,11 +137,37 @@ SELECT * FROM my_table WHERE id IN (SELECT id FROM another_table);
 __________
 ## Views
 
+##### Here are some key points to understand about views:
+
+* A view is defined by a SELECT statement that specifies the columns and rows to include in the view.
+* Once a view is created, it can be used like a regular table in SQL queries, including SELECT, INSERT, UPDATE, and DELETE statements.
+* Views are often used to simplify complex queries by providing a simplified and focused view of the data.
+* Views can also be used to restrict access to certain columns or rows of a table by granting access to the view instead of the underlying table.
+* Views can be used to aggregate data from multiple tables into a single view, making it easier to work with the data in reporting and analysis.
+* Here's an example of creating a view in SQL:
+
 ```sql
--- Create a view called my_view that selects data from the my_table table where the name is 'John'
-CREATE VIEW my_view AS
-SELECT * FROM my_table WHERE name = 'John';
+CREATE VIEW customer_orders AS
+SELECT customers.first_name, customers.last_name, orders.order_date, orders.total_amount
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id;
 ```
+##### This SQL statement creates a view called "customer_orders" that includes columns from the "orders" and "customers" tables.
+##### The view selects the "first_name", "last_name", "order_date", and "total_amount" columns from the "orders" and "customers" tables, based on a JOIN between the two tables on the "customer_id" column.
+##### Once the view is created, it can be used in SQL queries just like any other table.
+##### For example, to retrieve all orders for a specific customer, you could use the following SQL statement:
+
+```sql
+SELECT * FROM customer_orders WHERE first_name = 'John' AND last_name = 'Doe';
+This query retrieves all orders for the customer named John Doe, based on the "customer_orders" view that was created earlier.
+```
+
+##### In summary, views are a powerful tool in SQL that can be used to simplify complex queries, present data in a different way, and restrict access to sensitive data.
+They can be created using a SELECT statement and can be used like any other table in SQL queries.
+
+* #### [Q] what if we insert data after create the view, should the view be able to see new updates?
+* #### [A] Yes, the view will be able to see new updates to the underlying tables after it is created. Views are based on SELECT statements, so the data in the view is determined by the SELECT statement used to create it. If new data is added to the underlying tables, it will be reflected in the view as long as the SELECT statement in the view definition includes the new data.
+
 __________
 ## Stored Procedures
 
