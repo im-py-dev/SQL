@@ -67,8 +67,11 @@ SELECT * FROM my_table ORDER BY name ASC;
 SELECT * FROM my_table ORDER BY name DESC;
 ```
 __________
-## GROUP BY Clause
-#### We can use the GROUP BY clause to group the orders by customer and calculate the total amount spent by each customer.
+## Aggregating data
+##### To perform calculations on your data, use aggregate functions like `COUNT`, `SUM`, `AVG`, `MAX`, and `MIN`.
+##### You can also use the GROUP BY clause to group your data by one or more columns.
+##### We can use the GROUP BY clause to group the orders by customer and calculate the total amount spent by each customer.
+
 
 ```
 | order_id | customer_id | order_date  | total_amount |
