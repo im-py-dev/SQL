@@ -155,6 +155,67 @@ __________
 SELECT * FROM my_table WHERE id IN (SELECT id FROM another_table);
 ```
 __________
+## Creating indexes:
+##### To improve the performance of your queries, you can create indexes on your tables.
+##### Indexes allow MySQL to look up data more quickly, especially for large tables.
+##### To create an index, use the `CREATE INDEX` command followed by the name of your index, the name of your table, and the column you want to index:
+
+##### In SQL, an index is a data structure that helps to improve the performance of queries on large tables. An index can be created on one or more columns of a table to speed up searches, sorts, and other operations that involve those columns.
+
+##### To create an index in SQL, you can use the CREATE INDEX statement. The syntax is as follows:
+
+```sql
+CREATE [UNIQUE] INDEX index_name
+ON table_name (column_name1 [ASC|DESC], column_name2 [ASC|DESC], ...)
+```
+###### Here's an example:
+
+```sql
+CREATE INDEX idx_customer_name
+ON customers (last_name, first_name);
+```
+
+###### In this example, an index named idx_customer_name is created on the last_name and first_name columns of the customers table.
+
+##### The UNIQUE keyword can be used to create a unique index. A unique index ensures that each row in the table has a unique combination of values in the indexed columns. Here's an example:
+
+```sql
+CREATE UNIQUE INDEX idx_customer_email
+ON customers (email);
+```
+
+###### In this example, a unique index named idx_customer_email is created on the email column of the customers table.
+
+##### Indexes can also be created using the ALTER TABLE statement. Here's an example:
+
+```sql
+ALTER TABLE customers ADD INDEX idx_customer_name (last_name, first_name);
+```
+
+##### To drop an index in SQL, you can use the DROP INDEX statement. Here's an example:
+
+```sql
+DROP INDEX idx_customer_name ON customers;
+```
+
+###### In this example, the idx_customer_name index is dropped from the customers table.
+
+##### Keep in mind that creating too many indexes on a table can slow down insert, update, and delete operations, as well as take up additional disk space. It's important to create indexes only on columns that are frequently used in queries and to monitor the performance of your queries to ensure that your indexes are effective.
+
+## Q & A:
+- Is index sorting rows?
+  - Not exactly. While sorting can be a part of how indexes work, their primary purpose is to make it faster to find specific rows in a table based on the values in certain columns.
+  - An index is like a pointer to the location of a row in a table. It allows the database to quickly locate the rows that match a certain criteria, without having to scan through the entire table. This is done by creating a separate data structure that stores a sorted copy of the values in the indexed columns, along with pointers to the actual rows in the table
+  - When we execute a query that filters or sorts on the indexed column(s), the database can use the index to find the relevant rows much more efficiently than it would be able to without the index.
+
+__________
+## Modifying tables:
+##### To modify an existing table, use the ALTER TABLE command followed by the name of your table and the modification you want to make, such as adding a new column, modifying a column's data type, or dropping a column:
+```sql
+ALTER TABLE mytable
+ADD COLUMN email VARCHAR(255);
+```
+__________
 ## Views
 
 ##### Here are some key points to understand about views:
