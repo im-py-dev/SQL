@@ -28,6 +28,23 @@ INSERT INTO my_table (id, name)
 VALUES (1, 'John'), (2, 'Jane'), (3, 'Bob');
 ```
 __________
+## Updating data
+###### To update existing data in your table, use the UPDATE command followed by the name of your table, the column you want to update, and the new value:
+
+```sql
+UPDATE mytable
+SET age = 35
+WHERE name = 'John';
+```
+__________
+## Deleting data:
+###### To delete data from your table, use the DELETE FROM command followed by the name of your table and a condition that specifies which rows to delete:
+
+```sql
+DELETE FROM mytable
+WHERE age > 30;
+```
+__________
 ## Select Data
 
 ```sql
